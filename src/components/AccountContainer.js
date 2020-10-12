@@ -3,11 +3,13 @@ import TransactionsList from "./TransactionsList";
 import Search from "./Search";
 import AddTransactionForm from "./AddTransactionForm";
 
+
 class AccountContainer extends Component {
 
   state = {
     transactions : [],
-    search: ""
+    search: "",
+    select: "all"
   } 
 
   componentDidMount(){
@@ -34,12 +36,50 @@ class AccountContainer extends Component {
     })
   }
 
+  selectFun = (selectedResult) => {
+    this.setState({
+      select: selectedResult
+    })
+  }
+
   filterSearchTransactions = () => {
     let {transactions, search} = this.state
     let filterSearch = transactions.filter(transaction => {
       return transaction.description.toLowerCase().includes(search.toLowerCase())
     })
-    return filterSearch
+
+    let selectedChoice = this.state.select
+    switch(selectedChoice){
+      case "all" :
+        return filterSearch
+
+      case "descriptionUP" : 
+        return filterSearch.sort( (wordA, wordB) => {
+            return wordA.description.localeCompare(wordB.description)
+        })
+
+      case "descriptionDOWN" : 
+      return filterSearch.sort( (wordA, wordB) => {
+          return wordB.description.localeCompare(wordA.description)
+      })
+        
+      case "categoryUP" : 
+      return filterSearch.sort( (wordA, wordB) => {
+          return wordA.category.localeCompare(wordB.category)
+      })
+
+      case "categoryDOWN" : 
+      return filterSearch.sort( (wordA, wordB) => {
+          return wordB.category.localeCompare(wordA.category)
+      })
+
+      default:
+
+   
+    }
+
+
+    
   }
 
   render() {
@@ -56,6 +96,8 @@ class AccountContainer extends Component {
 
         <TransactionsList
           transactions={this.filterSearchTransactions()}
+          select={this.state.select}
+          selectFun={this.selectFun}
          />
       </div>
     );
