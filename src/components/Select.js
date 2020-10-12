@@ -17,6 +17,8 @@ const Select = (props) => {
         <option value={"descriptionDOWN"}>Sort by description (DESC)</option>
         <option value={"categoryUP"}>Sort by category (ASC)</option>
         <option value={"categoryDOWN"}>Sort by category (DESC)</option>
+        <option value={"amountUP"}>Sort by amount (ASC)</option>
+        <option value={"amountDOWN"}>Sort by amount (DESC)</option>
      </select>
    </div>
   )

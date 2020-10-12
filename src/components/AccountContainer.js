@@ -30,6 +30,18 @@ class AccountContainer extends Component {
     })
   }
 
+  deleteTransactionFun = (deletedTransaction) => {
+    let newTransArr = this.state.transactions.filter(transaction => {
+      return transaction.id !== deletedTransaction.id
+    })
+
+    this.setState({
+      transactions: newTransArr
+    })
+  }
+
+
+
   searchFun = (searchResult) => {
     this.setState({
       search: searchResult
@@ -41,6 +53,8 @@ class AccountContainer extends Component {
       select: selectedResult
     })
   }
+
+
 
   filterSearchTransactions = () => {
     let {transactions, search} = this.state
@@ -73,14 +87,21 @@ class AccountContainer extends Component {
           return wordB.category.localeCompare(wordA.category)
       })
 
+      case "amountUP" : 
+      return filterSearch.sort( (numA, numB) => {
+          return numA.amount - numB.amount
+      })
+
+      case "amountDOWN" : 
+      return filterSearch.sort( (numA, numB) => {
+          return numB.amount - numA.amount
+      })
+
       default:
-
-   
     }
-
-
-    
   }
+
+
 
   render() {
     return (
@@ -98,6 +119,7 @@ class AccountContainer extends Component {
           transactions={this.filterSearchTransactions()}
           select={this.state.select}
           selectFun={this.selectFun}
+          deleteTransactionFun={this.deleteTransactionFun}
          />
       </div>
     );

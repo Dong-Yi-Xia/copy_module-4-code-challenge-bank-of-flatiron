@@ -5,7 +5,11 @@ import Select from "./Select"
 const TransactionsList = (props) => {
 
   let componentArray = props.transactions.map(transactionObj => {
-    return <Transaction key={transactionObj.id} transaction={transactionObj}/>
+    return <Transaction 
+            key={transactionObj.id} 
+            transaction={transactionObj} 
+            deleteTransactionFun={props.deleteTransactionFun}
+          />
   })
 
 
