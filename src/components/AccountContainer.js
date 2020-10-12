@@ -97,6 +97,16 @@ class AccountContainer extends Component {
           return numB.amount - numA.amount
       })
 
+      case "dateUP" : 
+      return filterSearch.sort( (numA, numB) => {
+          return new Date(numA.date) - new Date(numB.date)
+      })
+
+      case "dateDOWN" : 
+      return filterSearch.sort( (numA, numB) => {
+          return new Date(numB.date) - new Date(numA.date)
+      })
+
       default:
     }
   }
