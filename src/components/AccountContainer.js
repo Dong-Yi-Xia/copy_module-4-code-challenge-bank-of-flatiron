@@ -57,13 +57,13 @@ class AccountContainer extends Component {
 
 
   filterSearchTransactions = () => {
-    let {transactions, search} = this.state
+    let {transactions, search, select} = this.state
+    
     let filterSearch = transactions.filter(transaction => {
       return transaction.description.toLowerCase().includes(search.toLowerCase())
     })
 
-    let selectedChoice = this.state.select
-    switch(selectedChoice){
+    switch(select){
       case "all" :
         return filterSearch
 
