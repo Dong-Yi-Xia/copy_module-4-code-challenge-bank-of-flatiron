@@ -23,10 +23,19 @@ class AccountContainer extends Component {
   }
 
 
+  // addTransactionFun = (addTransaction) =>{
+  //   let newTransArr = [...this.state.transactions, addTransaction]
+  //   this.setState({
+  //     transactions: newTransArr
+  //   })
+  // }
+  
+
   addTransactionFun = (addTransaction) =>{
-    let newTransArr = [...this.state.transactions, addTransaction]
-    this.setState({
-      transactions: newTransArr
+    this.setState(prevState => {
+      return {
+        transactions: [...prevState.transactions, addTransaction]
+      }
     })
   }
 
